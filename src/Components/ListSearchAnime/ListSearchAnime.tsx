@@ -37,7 +37,7 @@ const ListSearchAnime = () => {
           <Space width={10} />
           <TitleText
             children={item.animeData.anime_name
-              .replaceAll('_', ' ')
+              .replace(/_/g, ' ')
               .toUpperCase()}
           />
         </View>

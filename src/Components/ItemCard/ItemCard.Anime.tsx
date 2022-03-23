@@ -29,7 +29,7 @@ const ItemCardAnime: React.FC<ItemCardAnimeProps> = ({data}) => {
   }, [data]);
 
   const animeName = useMemo(
-    () => data.animeData?.anime_name.replaceAll('_', ' ').toUpperCase(),
+    () => data.animeData?.anime_name.replace(/_/g, ' ').toUpperCase(),
     [data.animeData?.anime_name],
   );
 

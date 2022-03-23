@@ -24,7 +24,7 @@ const useLogicAnimeFact = () => {
   }, [navigation]);
 
   const titleHeader = useMemo(
-    () => route.params?.animeName.replaceAll('_', ' ').toUpperCase(),
+    () => route.params?.animeName.replace(/_/g, ' ').toUpperCase(),
     [route.params?.animeName],
   );
 
