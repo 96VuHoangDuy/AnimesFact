@@ -1,9 +1,11 @@
 import {useCallback} from 'react';
 import animeListStore from 'store/AnimeList.store';
 
-const useLogicListAnimeStore = () => {
+const useAnimeStore = () => {
   const listAnime = animeListStore.listAnime;
   const fetchStatusAnimeStore = animeListStore.fetch_status;
+  const favoriteAnimes = animeListStore.favoriteAnimes;
+  const searchedAnime = animeListStore.listSearchAnime;
 
   const onFetchNewAnimeList = useCallback(() => {
     animeListStore.fetchNew();
@@ -13,17 +15,14 @@ const useLogicListAnimeStore = () => {
     animeListStore.fetchNext();
   }, []);
 
-  const onRefreshAnimeList = useCallback(() => {
-    animeListStore.refresh();
-  }, []);
-
   return {
     listAnime,
     fetchStatusAnimeStore,
     onFetchNewAnimeList,
     onFetchNextAnimeList,
-    onRefreshAnimeList,
+    favoriteAnimes,
+    searchedAnime,
   };
 };
 
-export default useLogicListAnimeStore;
+export default useAnimeStore;

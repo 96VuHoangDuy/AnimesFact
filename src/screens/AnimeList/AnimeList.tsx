@@ -1,34 +1,54 @@
 import React, {useCallback} from 'react';
 import {observer} from 'mobx-react';
-import {ANIME_DATA_TYPE} from 'api/AnimeAPI/anime.api.types';
 
 import ItemCardAnime, {IMAGE_SIZE} from 'Components/ItemCard/ItemCard.Anime';
 import useLogicAnimeList from './AnimeList.logic';
 
 import Screen from 'utils/screen';
-import {StyleSheet, View} from 'react-native';
+import {LayoutAnimation, RefreshControl, StyleSheet, View} from 'react-native';
 import colors from 'utils/colors';
 import Carousel from 'react-native-snap-carousel';
-import Header from 'Components/Header/Header';
 import Space from 'Components/Base/Space';
+import AnimeListHeader from './AnimeList.Header';
+import {AnimeItemStoreData} from 'store/AnimeList.store';
+import ListSearchAnime from 'Components/ListSearchAnime/ListSearchAnime';
 
 const AnimeList = () => {
-  const {listAnime} = useLogicAnimeList();
-
-  const ItemAnime = useCallback(({item}: {item: ANIME_DATA_TYPE}) => {
+  LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+  const {
+    listAnime,
+    favoriteAnimes,
+    isFetchingData,
+    isShowFavoriteAnime,
+    toggleShowFavoriteAnime,
+  } = useLogicAnimeList();
+  const ItemAnime = useCallback(({item}: {item: AnimeItemStoreData}) => {
     return <ItemCardAnime data={item} />;
   }, []);
 
+  const keyExtractor = useCallback(
+    (item: AnimeItemStoreData) => item.animeData.anime_name,
+    [],
+  );
+
   return (
     <View style={styles.container}>
-      <Header />
+      <AnimeListHeader
+        isShowFavoriteAnime={isShowFavoriteAnime}
+        toggleShowFavoriteAnime={toggleShowFavoriteAnime}
+      />
+
       <Space height={50} />
+
       <Carousel
-        data={listAnime}
+        keyExtractor={keyExtractor}
+        refreshControl={<RefreshControl refreshing={isFetchingData} />}
+        data={isShowFavoriteAnime ? favoriteAnimes : listAnime}
         renderItem={ItemAnime}
         sliderWidth={Screen.width}
         itemWidth={IMAGE_SIZE.width}
       />
+      <ListSearchAnime />
     </View>
   );
 };

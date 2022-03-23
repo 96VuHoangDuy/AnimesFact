@@ -16,7 +16,8 @@ export const SCREEN_OPTIONS: {
   [ROUTES.ANIME_LIST_SCREEN]: {
     headerShown: false,
   },
-  [ROUTES.FAVORITE_ANIME_SCREEN]: {
+  [ROUTES.FACT_ANIME]: {
     headerShown: false,
+    presentation: 'formSheet',
   },
 };

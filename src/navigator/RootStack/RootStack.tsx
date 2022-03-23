@@ -1,6 +1,6 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import FavoriteAnime from 'screens/FavoriteAnime/FavoriteAnime';
+import FactAnime from 'screens/AnimeFact/AnimeFact';
 import ROUTES from 'constants/routes';
 import AnimeList from 'screens/AnimeList/AnimeList';
 import {SAFE_AREA_EDGES, SCREEN_OPTIONS} from 'navigator/config';
@@ -22,9 +22,9 @@ function RootStack() {
           component={AnimeList}
         />
         <Stack.Screen
-          name={ROUTES.FAVORITE_ANIME_SCREEN}
-          options={SCREEN_OPTIONS[ROUTES.FAVORITE_ANIME_SCREEN]}
-          component={FavoriteAnime}
+          name={ROUTES.FACT_ANIME}
+          options={SCREEN_OPTIONS[ROUTES.FACT_ANIME]}
+          component={FactAnime}
         />
       </Stack.Navigator>
     </SafeAreaView>
