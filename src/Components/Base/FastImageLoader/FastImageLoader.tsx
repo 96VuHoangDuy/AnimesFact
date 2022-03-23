@@ -2,6 +2,7 @@ import LoadingIndicator from 'Components/LoadingIndicator';
 import React, {memo, useCallback, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import FastImage, {FastImageProps} from 'react-native-fast-image';
+import colors from 'utils/colors';
 
 type FastImageLoaderProps = {
   loadingColor?: string;
@@ -9,7 +10,11 @@ type FastImageLoaderProps = {
 } & FastImageProps;
 
 const FastImageLoader = (props: FastImageLoaderProps) => {
-  const {loadingColor = 'white', sizeLoading = 'large', ...imageProps} = props;
+  const {
+    loadingColor = colors.white,
+    sizeLoading = 'large',
+    ...imageProps
+  } = props;
   const [isImageLoad, setIsImageLoading] = useState(true);
 
   const onLoadImageEnd = useCallback(() => {
@@ -17,7 +22,7 @@ const FastImageLoader = (props: FastImageLoaderProps) => {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <View>
       <FastImage onLoadEnd={onLoadImageEnd} {...imageProps} />
 
       {isImageLoad && (
@@ -32,9 +37,5 @@ const FastImageLoader = (props: FastImageLoaderProps) => {
 export default memo(FastImageLoader);
 
 const styles = StyleSheet.create({
-  container: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   loadingView: {position: 'absolute'},
 });
